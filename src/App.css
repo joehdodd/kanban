@@ -1,4 +1,60 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif; }
+  font-family: sans-serif;
+  background-color: #e9ebee; }
+
+a {
+  text-decoration: none;
+  color: #0f6ba5; }
+
+.new-board-form {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%; }
+
+.sticky-toolbar-container {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  color: #f3f3f3;
+  background-color: #0f6ba5;
+  height: 50px;
+  padding: 15px; }
+
+.board-cards-container {
+  margin-top: 15px;
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 20px;
+  justify-items: center; }
+
+.board-card-container {
+  padding: 10px;
+  min-width: 250px;
+  min-height: 100px;
+  background-color: #f3f3f3;
+  border-radius: 3px;
+  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25); }
+
+.board-container {
+  padding: 15px;
+  display: grid;
+  grid-auto-flow: row;
+  justify-items: center;
+  grid-gap: 10px; }
+
+.list-container {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 10px;
+  justify-items: center;
+  padding: 10px;
+  background-color: #f3f3f3;
+  width: 95%;
+  min-height: 100px;
+  border-radius: 3px;
+  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25); }

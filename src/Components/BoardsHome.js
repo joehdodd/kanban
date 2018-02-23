@@ -11,7 +11,7 @@ const BoardsHome = props => {
     })
   }
   return (
-    <div>
+    <div className="board-cards-container">
       {renderBoardCards()}
     </div>
   )

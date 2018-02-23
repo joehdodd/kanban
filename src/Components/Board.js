@@ -20,7 +20,7 @@ class Board extends Component {
     const { lists } = this.state
     return lists.map(list => {
      return (
-       <List title={list.title}/>
+       <List key={list.title} title={list.title}/>
      )
     })
   }

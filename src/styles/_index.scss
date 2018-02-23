@@ -2,4 +2,19 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: $grey;
+}
+
+a {
+  text-decoration: none;
+  color: $blue;
+}
+
+.new-board-form {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }

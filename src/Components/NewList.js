@@ -20,10 +20,7 @@ class NewList extends Component {
   render () {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
-          List Name:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
+          <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Add a new List"/>
         <input type="submit" value="Submit" />
       </form>
     )

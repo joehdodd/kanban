@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const BoardCard = props => {
-  console.log(props);
   return (
     <Link
       to={{
@@ -10,7 +9,9 @@ const BoardCard = props => {
         state: { ...props }
       }}
     >
-      <div className="board-container">{props.title}</div>
+      <div className="board-card-container">
+        <span className="board-card-title">{props.title}</span>
+      </div>
     </Link>
   );
 };

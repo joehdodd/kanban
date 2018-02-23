@@ -1,0 +1,12 @@
+.list-container {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 10px;
+  justify-items: center;
+  padding: 10px;
+  background-color: $lightgrey;
+  width: 95%;
+  min-height: 100px;
+  border-radius: 3px;
+  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class NewBoard extends Component {
+class NewListCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,17 +14,17 @@ class NewBoard extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.newBoard(this.state.value)
+    this.props.newListCard(this.state.value)
   }
 
   render () {
     return (
-      <form className="new-board-form" onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Add a new Board"/>
+      <form onSubmit={this.handleSubmit}>
+          <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Add a new Card"/>
         <input type="submit" value="Submit" />
       </form>
     )
   }
 }
 
-export default NewBoard;
+export default NewListCard;
