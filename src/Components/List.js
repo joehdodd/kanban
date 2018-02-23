@@ -28,7 +28,7 @@ class List extends Component {
   render() {
     return (
       <div className="list-container">
-        <span>{this.props.title}</span>
+        <span className="list-title">{this.props.title}</span>
         <NewListCard newListCard={this.newListCard} />
         {this.renderListItems()}
       </div>

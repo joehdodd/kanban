@@ -2,7 +2,7 @@ import React from 'react';
 
 const ListCard = props => {
   return (
-    <div className="list-item-container">
+    <div className="list-card-container">
       <span>{props.title}</span>
     </div>
   )
