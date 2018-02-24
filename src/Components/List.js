@@ -28,11 +28,13 @@ class List extends Component {
   render() {
     return (
       <div className="list-container">
-        <span className="list-title">{this.props.title}</span>
-        <NewListCard newListCard={this.newListCard} />
+        <div className="list-title">
+          <span>{this.props.title}</span>
+        </div>
         <div className="list-items">
           {this.renderListItems()}
         </div>
+        <NewListCard newListCard={this.newListCard} />
       </div>
     )
   }
