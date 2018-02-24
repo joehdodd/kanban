@@ -26,4 +26,8 @@ a {
   justify-content: center;
   align-items: center;
   width: 100%;
+  @media screen and (min-width: $break-med) {
+    grid-auto-flow: column;
+    justify-content: start;
+  }
 }

@@ -5,6 +5,7 @@ class NewListCard extends Component {
     super(props);
     this.state = {
       value: '',
+      renderForm: false
     };
   }
 
@@ -17,12 +18,24 @@ class NewListCard extends Component {
     this.props.newListCard(this.state.value)
   }
 
+  renderForm = () => {
+    this.setState(prevState => ({ renderForm: !prevState.renderForm }))
+  }
+
   render () {
+    const { renderForm } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <span className="list-card-container">
+      { !renderForm &&
+        <span onClick={() => this.renderForm()}>Add a new card</span>
+      }
+      { !!renderForm &&
+        <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Add a new Card"/>
-        <input type="submit" value="Submit" />
-      </form>
+          <span onClick={() => this.renderForm()}>X</span>
+        </form> 
+      }
+      </span>
     )
   }
 }

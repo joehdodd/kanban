@@ -26,14 +26,17 @@ class List extends Component {
   }
 
   render() {
+    const { listCards } = this.state;
     return (
       <div className="list-container">
         <div className="list-title">
           <span>{this.props.title}</span>
         </div>
-        <div className="list-items">
-          {this.renderListItems()}
-        </div>
+        { !!listCards.length &&
+          <div className="list-items">
+            {this.renderListItems()}
+          </div>
+        }
         <NewListCard newListCard={this.newListCard} />
       </div>
     )

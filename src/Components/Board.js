@@ -32,10 +32,12 @@ class Board extends Component {
       <div className="board">
         <div className="board-info-wrapper">
           <span>{title}</span>
-          <NewList newList={this.newList}/>
         </div>
         <div className="lists-wrapper">
           {this.renderLists()}
+          <div className="add-list-container">
+            <NewList newList={this.newList}/>
+          </div>
         </div>
       </div>
     )
