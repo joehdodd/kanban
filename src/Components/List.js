@@ -30,7 +30,9 @@ class List extends Component {
       <div className="list-container">
         <span className="list-title">{this.props.title}</span>
         <NewListCard newListCard={this.newListCard} />
-        {this.renderListItems()}
+        <div className="list-items">
+          {this.renderListItems()}
+        </div>
       </div>
     )
   }

@@ -1,8 +1,16 @@
-.board-container {
-  padding: 15px;
+.board {
   display: grid;
   grid-auto-flow: row;
   justify-items: center;
   grid-gap: 10px;
+  @media screen and (min-width: $break-med) {
+    justify-items: start;
+    padding-top: 15px;
+    max-height: calc(100vh - 80px);
+    overflow: hidden;
+  }
+}
 
+.board-info-wrapper {
+  padding: 0 15px;
 }

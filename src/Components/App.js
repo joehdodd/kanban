@@ -22,7 +22,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <span>
         <StickyToolbar newBoard={this.newBoard}/>
         <Route
           exact
@@ -38,7 +38,7 @@ class App extends Component {
             <Board {...props}/>
           )}
         />
-      </div>
+      </span>
     );
   }
 }

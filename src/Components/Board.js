@@ -19,19 +19,24 @@ class Board extends Component {
   renderLists = () => {
     const { lists } = this.state
     return lists.map(list => {
-     return (
-       <List key={list.title} title={list.title}/>
-     )
+      let uniqueKey = Math.floor((1 + Math.random()) * 0x10000).toString();
+      return (
+        <List key={uniqueKey} title={list.title}/>
+      )
     })
   }
 
   render() {
     const { title } = this.props.location.state;
     return (
-      <div className="board-container">
-        <span>{title}</span>
-        <NewList newList={this.newList}/>
-        {this.renderLists()}
+      <div className="board">
+        <div className="board-info-wrapper">
+          <span>{title}</span>
+          <NewList newList={this.newList}/>
+        </div>
+        <div className="lists-wrapper">
+          {this.renderLists()}
+        </div>
       </div>
     )
 
