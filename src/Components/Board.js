@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import NewList from './NewList';
-import List from './List';
+import React, { Component } from "react";
+import NewList from "./NewList";
+import List from "./List";
 
 class Board extends Component {
   constructor(props) {
@@ -10,20 +10,25 @@ class Board extends Component {
     };
   }
 
-  newList = (listInfo) => {
+  newList = listInfo => {
     this.setState(prevState => ({
-      lists: [ ...prevState.lists, { title: listInfo }  ]
-    }))
-  }
+      lists: [...prevState.lists, { title: listInfo }]
+    }));
+  };
 
   renderLists = () => {
     const { lists } = this.state;
     return lists.map((list, index) => {
       return (
-        <List key={`list_${list.title}`} index={index} title={list.title} newCard={this.props.newCard}/>
-      )
-    })
-  }
+        <List
+          key={`list_${list.title}`}
+          index={index}
+          title={list.title}
+          newCard={this.props.newCard}
+        />
+      );
+    });
+  };
 
   render() {
     const { title } = this.props.location.state;
@@ -33,16 +38,15 @@ class Board extends Component {
           <span>{title}</span>
         </div>
         <div className="lists-wrapper">
-          { !!this.state.lists && !!this.state.lists.length &&
-            this.renderLists()
-          }
+          {!!this.state.lists &&
+            !!this.state.lists.length &&
+            this.renderLists()}
           <div className="add-list-container">
-            <NewList newList={this.newList}/>
+            <NewList newList={this.newList} />
           </div>
         </div>
       </div>
-    )
-
+    );
   }
 }
 

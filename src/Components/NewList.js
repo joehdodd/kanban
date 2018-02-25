@@ -1,28 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class NewList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: ""
     };
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({ value: event.target.value });
-  }
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    this.props.newList(this.state.value)
-  }
+    this.props.newList(this.state.value);
+  };
 
-  render () {
+  render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Add a new List"/>
+        <input
+          type="text"
+          value={this.state.value}
+          onChange={this.handleChange}
+          placeholder="Add a new List"
+        />
       </form>
-    )
+    );
   }
 }
 
