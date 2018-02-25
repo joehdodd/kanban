@@ -1,5 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: $blue;
+}
+
+a {
+  text-decoration: none;
+  color: $blue;
+}
+
+.new-board-form {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  @media screen and (min-width: $break-med) {
+    grid-auto-flow: column;
+    justify-content: start;
+  }
 }

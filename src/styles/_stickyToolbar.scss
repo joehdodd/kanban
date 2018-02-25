@@ -1,0 +1,8 @@
+.sticky-toolbar-container {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  color: $lightgrey;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 15px;
+}

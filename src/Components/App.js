@@ -9,36 +9,36 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      boards: []
+      boards: [],
     };
   }
 
   newBoard = (boardInfo) => {
-    console.log(boardInfo);
     this.setState(prevState => ({
       boards: [ { title: boardInfo }, ...prevState.boards ]
     }))
   }
 
   render() {
+    const { boards } = this.state;
     return (
-      <div>
+      <span>
         <StickyToolbar newBoard={this.newBoard}/>
         <Route
           exact
           path='/'
           render={props => (
-            <BoardsHome {...props} boards={this.state.boards}/>
+            <BoardsHome {...props} boards={boards}/>
           )}
         />
         <Route
           exact
           path='/:boardId'
           render={props => (
-            <Board {...props}/>
+            <Board {...props} />
           )}
         />
-      </div>
+      </span>
     );
   }
 }

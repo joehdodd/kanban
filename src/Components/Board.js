@@ -12,26 +12,34 @@ class Board extends Component {
 
   newList = (listInfo) => {
     this.setState(prevState => ({
-      lists: [ { title: listInfo }, ...prevState.lists ]
+      lists: [ ...prevState.lists, { title: listInfo }  ]
     }))
   }
 
   renderLists = () => {
-    const { lists } = this.state
-    return lists.map(list => {
-     return (
-       <List title={list.title}/>
-     )
+    const { lists } = this.state;
+    return lists.map((list, index) => {
+      return (
+        <List key={`list_${list.title}`} index={index} title={list.title} newCard={this.props.newCard}/>
+      )
     })
   }
 
   render() {
     const { title } = this.props.location.state;
     return (
-      <div className="board-container">
-        <span>{title}</span>
-        <NewList newList={this.newList}/>
-        {this.renderLists()}
+      <div className="board">
+        <div className="board-info-wrapper">
+          <span>{title}</span>
+        </div>
+        <div className="lists-wrapper">
+          { !!this.state.lists && !!this.state.lists.length &&
+            this.renderLists()
+          }
+          <div className="add-list-container">
+            <NewList newList={this.newList}/>
+          </div>
+        </div>
       </div>
     )
 

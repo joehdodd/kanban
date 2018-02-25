@@ -5,13 +5,13 @@ const BoardsHome = props => {
   const renderBoardCards = () => {
     const { boards } = props;
     return boards.map(board => {
-     return (
-       <BoardCard title={board.title}/>
-     )
+      return (
+        <BoardCard key={`board_${board.toString()}`} title={board.title}/>
+      )
     })
   }
   return (
-    <div>
+    <div className="board-cards-container">
       {renderBoardCards()}
     </div>
   )

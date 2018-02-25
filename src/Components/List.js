@@ -1,11 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
+import ListCard from './ListCard';
+import NewListCard from './NewListCard';
 
-const List = props => {
-  return (
-    <div className="list-container">
-      <span>Hi! I'm a list.</span>
-    </div>
-  )
+class List extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: []
+    };
+  }
+
+  newCard = (listCardInfo) => {
+    this.setState(prevState => ({
+      cards: [ ...this.state.cards, { title: listCardInfo } ]
+    }))
+  }
+
+  renderListItems = () => {
+    const { cards } = this.state;
+    return cards.map((card, index) => {
+     return (
+       <ListCard key={`card_${card.title}`} index={index} title={card.title}/>
+     )
+    })
+  }
+
+  render() {
+    const { cards } = this.state;
+    return (
+      <div className="list-container">
+        <div className="list-title">
+          <span>{this.props.title} {this.props.id}</span>
+        </div>
+        { !!cards && !!cards.length &&
+          <div className="list-items">
+            {this.renderListItems()}
+          </div>
+        }
+        <NewListCard newCard={this.newCard} />
+      </div>
+    )
+  }
 }
 
 export default List;

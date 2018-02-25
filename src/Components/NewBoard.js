@@ -19,11 +19,8 @@ class NewBoard extends Component {
 
   render () {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Board Name:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
+      <form className="new-board-form" onSubmit={this.handleSubmit}>
+          <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Add a new Board"/>
         <input type="submit" value="Submit" />
       </form>
     )

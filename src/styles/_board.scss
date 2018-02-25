@@ -1,0 +1,26 @@
+.board {
+  display: grid;
+  grid-auto-flow: row;
+  justify-items: center;
+  grid-gap: 10px;
+  @media screen and (min-width: $break-med) {
+    justify-items: start;
+    padding-top: 15px;
+    max-height: calc(100vh - 80px);
+    overflow: hidden;
+  }
+}
+
+.board-info-wrapper {
+  padding: 0 15px;
+}
+
+.add-list-container {
+  background: $cardbg;
+  height: 40px;
+  width: 275px;
+  border-radius: 3px;
+  display: grid;
+  padding: 10px;
+  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
+}
