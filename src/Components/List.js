@@ -12,7 +12,7 @@ class List extends Component {
 
   newCard = listCardInfo => {
     this.setState(prevState => ({
-      cards: [...this.state.cards, { title: listCardInfo }]
+      cards: [...prevState.cards, { title: listCardInfo }]
     }));
   };
 
