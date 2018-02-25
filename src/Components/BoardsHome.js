@@ -6,7 +6,7 @@ const BoardsHome = props => {
     const { boards } = props;
     return boards.map(board => {
       return (
-        <BoardCard key={`board_${board.toString()}`} title={board.title} />
+        <BoardCard key={`board_${board.title}`} title={board.title} />
       );
     });
   };
