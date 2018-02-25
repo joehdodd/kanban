@@ -59,7 +59,7 @@ a {
     .board {
       justify-items: start;
       padding-top: 15px;
-      max-height: calc(100vh - 80px);
+      max-height: calc(100vh - 60px);
       overflow: hidden; } }
 
 .board-info-wrapper {
@@ -83,7 +83,7 @@ a {
   overflow-x: scroll; }
   @media screen and (min-width: 768px) {
     .lists-wrapper {
-      height: calc(100vh - 140px);
+      height: calc(100vh - 102px);
       justify-content: start; } }
 
 .list-container {
@@ -125,7 +125,7 @@ a {
   border-bottom: 1px solid #a1a1a1; }
 
 .list-items {
-  max-height: calc(100vh - 275px);
+  max-height: calc(100vh - 250px);
   overflow-y: scroll;
   display: grid;
   grid-auto-flow: row;
