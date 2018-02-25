@@ -9,7 +9,51 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      boards: []
+      boards: [
+        {
+          title: 'Home',
+          lists: [
+            {
+              title: 'To Do',
+              cards: [
+                { title: 'Finish this project.'},
+                { title: 'Start that project.'}
+              ]
+            },
+            {
+              title: 'Doing',
+              cards: []
+            },
+            {
+              title: 'Done',
+              cards: []
+            }
+          ]
+        },
+        {
+          title: 'Work',
+          lists: [
+            {
+              title: 'To Do',
+              cards: [
+                { title: 'Finish agonizing.'},
+                { title: 'Start a something.'}
+              ]
+            },
+            {
+              title: 'Doing',
+              cards: [
+                { title: 'Brooding.'},
+                { title: 'Coding.'}
+              ]
+            },
+            {
+              title: 'Done',
+              cards: []
+            }
+          ]
+        }
+      ]
     };
   }
 
