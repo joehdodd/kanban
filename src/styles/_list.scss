@@ -6,7 +6,7 @@
   max-width: 100%;
   overflow-x: scroll;
   @media screen and (min-width: $break-med) {
-    height: calc(100vh - 140px);
+    height: calc(100vh - 102px);
     justify-content: start;
   }
 }
@@ -54,7 +54,7 @@
 }
 
 .list-items {
-  max-height: calc(100vh - 275px);
+  max-height: calc(100vh - 250px);
   overflow-y: scroll;
   display: grid;
   grid-auto-flow: row;

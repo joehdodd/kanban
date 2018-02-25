@@ -6,15 +6,11 @@ const BoardsHome = props => {
     const { boards } = props;
     return boards.map(board => {
       return (
-        <BoardCard key={`board_${board.toString()}`} title={board.title}/>
-      )
-    })
-  }
-  return (
-    <div className="board-cards-container">
-      {renderBoardCards()}
-    </div>
-  )
-}
+        <BoardCard key={`board_${board.title}`} title={board.title} />
+      );
+    });
+  };
+  return <div className="board-cards-container">{renderBoardCards()}</div>;
+};
 
 export default BoardsHome;

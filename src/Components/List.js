@@ -10,36 +10,37 @@ class List extends Component {
     };
   }
 
-  newCard = (listCardInfo) => {
+  newCard = listCardInfo => {
     this.setState(prevState => ({
-      cards: [ ...this.state.cards, { title: listCardInfo } ]
-    }))
-  }
+      cards: [...this.state.cards, { title: listCardInfo }]
+    }));
+  };
 
   renderListItems = () => {
     const { cards } = this.state;
     return cards.map((card, index) => {
-     return (
-       <ListCard key={`card_${card.title}`} index={index} title={card.title}/>
-     )
-    })
-  }
+      return (
+        <ListCard key={`card_${card.title}`} index={index} title={card.title} />
+      );
+    });
+  };
 
   render() {
     const { cards } = this.state;
     return (
       <div className="list-container">
         <div className="list-title">
-          <span>{this.props.title} {this.props.id}</span>
+          <span>
+            {this.props.title} {this.props.id}
+          </span>
         </div>
-        { !!cards && !!cards.length &&
-          <div className="list-items">
-            {this.renderListItems()}
-          </div>
-        }
+        {!!cards &&
+          !!cards.length && (
+            <div className="list-items">{this.renderListItems()}</div>
+          )}
         <NewListCard newCard={this.newCard} />
       </div>
-    )
+    );
   }
 }
 

@@ -9,34 +9,39 @@ class NewListCard extends Component {
     };
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({ value: event.target.value });
-  }
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    this.props.newCard(this.state.value)
-  }
+    this.props.newCard(this.state.value);
+  };
 
   renderForm = () => {
-    this.setState(prevState => ({ renderForm: !prevState.renderForm }))
-  }
+    this.setState(prevState => ({ renderForm: !prevState.renderForm }));
+  };
 
-  render () {
+  render() {
     const { renderForm } = this.state;
     return (
       <span className="list-card-container">
-      { !renderForm &&
-        <span onClick={() => this.renderForm()}>Add a new card</span>
-      }
-      { !!renderForm &&
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Add a new Card"/>
-          <span onClick={() => this.renderForm()}>X</span>
-        </form> 
-      }
+        {!renderForm && (
+          <span onClick={() => this.renderForm()}>Add a new card</span>
+        )}
+        {!!renderForm && (
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              value={this.state.value}
+              onChange={this.handleChange}
+              placeholder="Add a new Card"
+            />
+            <span onClick={() => this.renderForm()}>X</span>
+          </form>
+        )}
       </span>
-    )
+    );
   }
 }
 
