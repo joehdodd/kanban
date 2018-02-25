@@ -15,7 +15,7 @@ class NewListCard extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.newListCard(this.state.value)
+    this.props.newCard(this.state.value)
   }
 
   renderForm = () => {

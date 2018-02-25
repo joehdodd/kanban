@@ -12,16 +12,15 @@ class Board extends Component {
 
   newList = (listInfo) => {
     this.setState(prevState => ({
-      lists: [ { title: listInfo }, ...prevState.lists ]
+      lists: [ ...prevState.lists, { title: listInfo }  ]
     }))
   }
 
   renderLists = () => {
-    const { lists } = this.state
-    return lists.map(list => {
-      let uniqueKey = Math.floor((1 + Math.random()) * 0x10000).toString();
+    const { lists } = this.state;
+    return lists.map((list, index) => {
       return (
-        <List key={uniqueKey} title={list.title}/>
+        <List key={`list_${list.title}`} index={index} title={list.title} newCard={this.props.newCard}/>
       )
     })
   }
@@ -34,7 +33,9 @@ class Board extends Component {
           <span>{title}</span>
         </div>
         <div className="lists-wrapper">
-          {this.renderLists()}
+          { !!this.state.lists && !!this.state.lists.length &&
+            this.renderLists()
+          }
           <div className="add-list-container">
             <NewList newList={this.newList}/>
           </div>

@@ -6,38 +6,38 @@ class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listCards: []
+      cards: []
     };
   }
 
-  newListCard = (listCardInfo) => {
+  newCard = (listCardInfo) => {
     this.setState(prevState => ({
-      listCards: [ { title: listCardInfo }, ...prevState.listCards ]
+      cards: [ ...this.state.cards, { title: listCardInfo } ]
     }))
   }
 
   renderListItems = () => {
-    const { listCards } = this.state
-    return listCards.map(card => {
+    const { cards } = this.state;
+    return cards.map((card, index) => {
      return (
-       <ListCard key={card.title} title={card.title}/>
+       <ListCard key={`card_${card.title}`} index={index} title={card.title}/>
      )
     })
   }
 
   render() {
-    const { listCards } = this.state;
+    const { cards } = this.state;
     return (
       <div className="list-container">
         <div className="list-title">
-          <span>{this.props.title}</span>
+          <span>{this.props.title} {this.props.id}</span>
         </div>
-        { !!listCards.length &&
+        { !!cards && !!cards.length &&
           <div className="list-items">
             {this.renderListItems()}
           </div>
         }
-        <NewListCard newListCard={this.newListCard} />
+        <NewListCard newCard={this.newCard} />
       </div>
     )
   }

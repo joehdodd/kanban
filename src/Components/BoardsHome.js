@@ -5,9 +5,8 @@ const BoardsHome = props => {
   const renderBoardCards = () => {
     const { boards } = props;
     return boards.map(board => {
-      let uniqueKey = Math.floor((1 + Math.random()) * 0x10000).toString();
       return (
-        <BoardCard key={uniqueKey} title={board.title}/>
+        <BoardCard key={`board_${board.toString()}`} title={board.title}/>
       )
     })
   }
