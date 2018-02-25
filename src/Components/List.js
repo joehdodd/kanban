@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import ListCard from "./ListCard";
-import NewListCard from "./NewListCard";
+import React, { Component } from 'react';
+import ListCard from './ListCard';
+import NewListCard from './NewListCard';
 
 class List extends Component {
   constructor(props) {

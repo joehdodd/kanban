@@ -5,5 +5,5 @@ const Card = props => {
     <div className="card-container">
       <span>Hi! I'm a card.</span>
     </div>
-  )
-}
+  );
+};

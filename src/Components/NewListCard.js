@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class NewListCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
+      value: '',
       renderForm: false
     };
   }

@@ -4,26 +4,31 @@ class NewBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: ''
     };
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({ value: event.target.value });
-  }
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    this.props.newBoard(this.state.value)
-  }
+    this.props.newBoard(this.state.value);
+  };
 
-  render () {
+  render() {
     return (
       <form className="new-board-form" onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Add a new Board"/>
+        <input
+          type="text"
+          value={this.state.value}
+          onChange={this.handleChange}
+          placeholder="Add a new Board"
+        />
         <input type="submit" value="Submit" />
       </form>
-    )
+    );
   }
 }
 

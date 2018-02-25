@@ -5,7 +5,7 @@ const ListCard = props => {
     <div className="list-card-container">
       <span>{props.title}</span>
     </div>
-  )
-}
+  );
+};
 
 export default ListCard;
