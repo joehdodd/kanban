@@ -3,10 +3,8 @@ import NewList from './NewList';
 import List from './List';
 
 class Board extends Component {
-  renderLists = () => {
-    const { lists } = this.props;
-    console.log(lists);
-    return lists.map((list, index) => {
+  renderLists = thisBoard => {
+    return thisBoard.lists.map((list, index) => {
       return (
         <List
           key={`list_${list.title}`}
@@ -20,18 +18,23 @@ class Board extends Component {
   };
   render() {
     const { title } = this.props.location.state;
-    const { lists } = this.props;
+    const { boardId } = this.props.match.params;
+    const [thisBoard] = this.props.boards
+      .filter(board => board.id === boardId)
+      .map(board => board);
     return (
       <div className="board">
         <div className="board-info-wrapper">
-          <span style={{color: 'aliceblue'}}>{title}</span>
+          <span style={{ color: 'aliceblue' }}>{title}</span>
         </div>
         <div className="lists-wrapper">
-          {!!lists &&
-            !!lists.length &&
-            this.renderLists()}
+          { !!thisBoard &&
+            !!thisBoard.lists &&
+            !!thisBoard.lists.length &&
+            this.renderLists(thisBoard)
+          }
           <div className="add-list-container">
-            <NewList newList={this.props.newList} />
+            <NewList boardId={boardId} newList={this.props.newList} />
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ const BoardCard = props => {
   return (
     <Link
       to={{
-        pathname: `/${props.title}`,
+        pathname: `/board/${props.id}`,
         state: { ...props }
       }}
     >

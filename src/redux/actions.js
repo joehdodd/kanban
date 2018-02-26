@@ -1,5 +1,6 @@
 const uuidv4 = () => {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+    // eslint-disable-next-line
     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
   )
 }
@@ -14,10 +15,11 @@ export function addBoard(board) {
 }
 
 export const ADD_LIST = 'ADD_LIST';
-export function addList(list) {
+export function addList(list, boardId) {
   return {
     type: ADD_LIST,
-    id: uuidv4(),
+    boardId: boardId,
+    listId: uuidv4(),
     list: list
   }
 }

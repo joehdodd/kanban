@@ -14,7 +14,7 @@ class NewList extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.newList(this.state.value);
+    this.props.newList(this.state.value, this.props.boardId);
   };
 
   render() {
