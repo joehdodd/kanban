@@ -27,8 +27,7 @@ class List extends Component {
   };
 
   render() {
-    const { cards } = this.props;
-    console.log(this.props);
+    const { cards, id } = this.props;
     return (
       <Draggable
         draggableId={this.props.id}
@@ -62,7 +61,7 @@ class List extends Component {
                     !!cards.length && (
                       <div className="list-items">{this.renderListItems()}</div>
                     )}
-                  <NewListCard newCard={this.newCard} />
+                  <NewListCard listId={id} newCard={this.props.newCard} />
                 </div>
               </div>
               {provided.placeholder}

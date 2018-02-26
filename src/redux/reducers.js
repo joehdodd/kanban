@@ -1,6 +1,6 @@
 import { ADD_BOARD, ADD_LIST, REORDER_LIST, ADD_CARD } from './actions';
 
-export function handleBoards(
+export function boards(
   state = {
     boards: []
   },
@@ -57,6 +57,15 @@ export function lists(state = [], action) {
   switch (action.type) {
     case ADD_LIST:
       return [...state, handleList(state, action)];
+    case ADD_CARD:
+      const { listId } = action;
+      return state.map(list => {
+        if (list.listId !== listId) return list;
+        return {
+          ...list,
+          cards: cards(state.cards, action)
+        }
+      })
     default:
       return state;
   }
@@ -72,14 +81,10 @@ export function handleCard(state = {}, action) {
   }
 }
 
-export function handleCards(state = [], action) {
-  switch (action.tpe) {
+export function cards(state = [], action) {
+  switch (action.type) {
     case ADD_CARD:
-      return [...state, handleCard(null, action)];
-    // {
-    //   ...state,
-    //   cards: [...state.cards, { id: action.id, title: action.card }]
-    // };
+      return [...state, handleCard(state, action)];
     default:
       return state;
   }

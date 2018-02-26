@@ -29,16 +29,16 @@ export function reorderList(list, boardId) {
   return {
     type: REORDER_LIST,
     boardId: boardId,
-    // listId: listId,
     list: list
   }
 }
 
 export const ADD_CARD = 'ADD_CARD';
-export function addCard(card) {
+export function addCard(card, listId) {
   return {
     type: ADD_CARD,
     id: uuidv4(),
+    listId: listId,
     card: card
   }
 }
