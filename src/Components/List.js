@@ -12,12 +12,12 @@ class List extends Component {
 
   newCard = listCardInfo => {
     this.setState(prevState => ({
-      cards: [...this.state.cards, { title: listCardInfo }]
+      cards: [...prevState.cards, { title: listCardInfo }]
     }));
   };
 
   renderListItems = () => {
-    const { cards } = this.state;
+    const { cards } = this.props;
     return cards.map((card, index) => {
       return (
         <ListCard key={`card_${card.title}`} index={index} title={card.title} />
@@ -26,7 +26,7 @@ class List extends Component {
   };
 
   render() {
-    const { cards } = this.state;
+    const { cards } = this.props;
     return (
       <div className="list-container">
         <div className="list-title">
