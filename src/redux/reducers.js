@@ -7,6 +7,16 @@ export function handleBoards(state = { boards: [] }, action) {
         ...state,
         boards: [{ id: action.id, title: action.board }, ...state.boards]
       };
+    case ADD_LIST:
+      const { id } = action;
+      console.log(state);
+      return {
+        ...state,
+        boards: state.boards.map(board => {
+          console.log(board, board.id, handleLists(board.lists, action));
+          return board.id !== id ? board : { ...board, lists: handleLists(board.lists, action) }
+        })
+      }
     default:
       return state;
   }

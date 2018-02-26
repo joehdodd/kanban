@@ -3,14 +3,23 @@ import BoardCard from './BoardCard';
 
 const BoardsHome = props => {
   const renderBoardCards = () => {
-    const { boards } = props;
+    const { boards, lists } = props;
+    console.log(boards, lists);
     return boards.map(board => {
       return (
-        <BoardCard key={`board_${board.title}`} title={board.title} lists={board.lists} />
+        <BoardCard key={`board_${board.title}`} title={board.title} lists={lists} />
       );
     });
   };
-  return <div className="board-cards-container">{renderBoardCards()}</div>;
+  const { boards } = props;
+  console.log(props);
+  return (
+    <div className="board-cards-container">
+      { !!boards && !!boards.length &&
+        renderBoardCards()
+      }
+    </div>
+  );
 };
 
 export default BoardsHome;

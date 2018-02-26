@@ -9,7 +9,7 @@ import Board from "./Board";
 import "../App.css";
 
 class App extends Component {
-  componentDidMount() {
+  componentDidUpdate(prevProps, prevState) {
     console.log(this.props);
   }
   constructor(props) {
@@ -71,22 +71,19 @@ class App extends Component {
   newList = listInfo => {
     const { addList } = this.props.actions;
     addList(listInfo);
-    // this.setState(prevState => ({
-    //   lists: [...prevState.lists, { title: listInfo }]
-    // }));
   };
 
   render() {
-    const { boards } = this.props;
+    const { boards, lists } = this.props;
     return (
       <span>
         <StickyToolbar newBoard={this.newBoard} />
         <Route
           exact
           path="/"
-          render={props => <BoardsHome {...props} boards={boards} />}
+          render={props => <BoardsHome {...props} boards={boards} lists={lists} />}
         />
-        <Route exact path="/:boardId" render={props => <Board {...props} newList={this.newList} />} />
+        <Route exact path="/:boardId" render={props => <Board {...props} newList={this.newList} lists={lists} />} />
       </span>
     );
   }

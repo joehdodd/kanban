@@ -4,7 +4,7 @@ import List from './List';
 
 class Board extends Component {
   renderLists = () => {
-    const { lists } = this.props.location.state;
+    const { lists } = this.props;
     console.log(lists);
     return lists.map((list, index) => {
       return (
@@ -19,7 +19,8 @@ class Board extends Component {
     });
   };
   render() {
-    const { title, lists } = this.props.location.state;
+    const { title } = this.props.location.state;
+    const { lists } = this.props;
     return (
       <div className="board">
         <div className="board-info-wrapper">
