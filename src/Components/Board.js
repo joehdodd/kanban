@@ -3,19 +3,6 @@ import NewList from './NewList';
 import List from './List';
 
 class Board extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lists: []
-    };
-  }
-
-  newList = listInfo => {
-    this.setState(prevState => ({
-      lists: [...prevState.lists, { title: listInfo }]
-    }));
-  };
-
   renderLists = () => {
     const { lists } = this.props.location.state;
     console.log(lists);
@@ -31,7 +18,6 @@ class Board extends Component {
       );
     });
   };
-
   render() {
     const { title, lists } = this.props.location.state;
     return (
@@ -44,7 +30,7 @@ class Board extends Component {
             !!lists.length &&
             this.renderLists()}
           <div className="add-list-container">
-            <NewList newList={this.newList} />
+            <NewList newList={this.props.newList} />
           </div>
         </div>
       </div>
