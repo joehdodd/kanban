@@ -14,26 +14,26 @@ const reorderArr = (list, startIndex, endIndex) => {
 class Board extends Component {
   onDragEnd = result => {
     const { boardId } = this.props.match.params;
-    const [thisBoard] = this.props.boards
-      .filter(board => board.id === boardId)
-      .map(board => board);
+    let lists = this.props.lists.filter(list => list.boardId === boardId);
     if (!result.destination) {
       return;
     }
 
     const items = reorderArr(
-      thisBoard.lists,
+      lists,
       result.source.index,
       result.destination.index
     );
     this.props.reorderList(items, boardId);
   };
   renderLists = thisBoard => {
-    return thisBoard.lists.map((list, index) => {
+    const { boardId } = this.props.match.params;
+    let lists = this.props.lists.filter(list => list.boardId === boardId);
+    return lists.map((list, index) => {
       return (
         <List
           key={`list_${list.listId}`}
-          id={`list_${list.listId}`}
+          id={list.listId}
           index={index}
           title={list.title}
           newCard={this.props.newCard}
@@ -43,11 +43,9 @@ class Board extends Component {
     });
   };
   render() {
-    const { title } = this.props.location.state;
     const { boardId } = this.props.match.params;
-    const [thisBoard] = this.props.boards
-      .filter(board => board.id === boardId)
-      .map(board => board);
+    const { title } = this.props.location.state;
+    let lists = this.props.lists.filter(list => list.boardId === boardId);
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className="board">
@@ -58,10 +56,9 @@ class Board extends Component {
             <Droppable droppableId="lists-droppable" direction="horizontal">
               {(provided, snapshot) => (
                 <div ref={provided.innerRef} className="lists-wrapper">
-                  {!!thisBoard &&
-                    !!thisBoard.lists &&
-                    !!thisBoard.lists.length &&
-                    this.renderLists(thisBoard)}
+                  {!!lists &&
+                    !!lists.length &&
+                    this.renderLists()}
                   {provided.placeholder}
                 </div>
               )}

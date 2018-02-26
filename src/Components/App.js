@@ -19,8 +19,14 @@ class App extends Component {
     addList(listInfo, boardId);
   };
 
+  newCard = (cardInfo, listId) => {
+    const { addCard } = this.props.actions;
+    addCard(cardInfo, listId);
+  };
+
   render() {
-    const { boards, actions } = this.props;
+    const { boards, lists, cards, actions } = this.props;
+    console.log(lists, cards);
     return (
       <span>
         <StickyToolbar newBoard={this.newBoard} />
@@ -33,7 +39,15 @@ class App extends Component {
           exact
           path="/board/:boardId"
           render={props => (
-            <Board {...props} boards={boards} newList={this.newList} reorderList={actions.reorderList}/>
+            <Board
+              {...props}
+              boards={boards}
+              lists={lists}
+              cards={cards}
+              newList={this.newList}
+              newCard={this.newCard}
+              reorderList={actions.reorderList}
+            />
           )}
         />
       </span>
@@ -42,13 +56,16 @@ class App extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const { handleBoards, handleCards, router } = state;
-  const { boards } = handleBoards;
-  // const { cards } = handleCards;
+  const { boards, lists, cards, router } = state;
+  // const { boards } = boards;
+  // const { lists } = lists;
+  // const { cards } = cards;
   const { location } = router;
+  console.log(boards, lists, cards);
   return {
-    boards,
-    // cards,
+    ...boards,
+    lists,
+    cards,
     location
   };
 }
