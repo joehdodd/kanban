@@ -24,6 +24,16 @@ export function addList(list, boardId) {
   }
 }
 
+export const REORDER_LIST = 'REORDER_LIST';
+export function reorderList(list, boardId) {
+  return {
+    type: REORDER_LIST,
+    boardId: boardId,
+    // listId: listId,
+    list: list
+  }
+}
+
 export const ADD_CARD = 'ADD_CARD';
 export function addCard(card) {
   return {

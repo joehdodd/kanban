@@ -1,4 +1,4 @@
-import { ADD_BOARD, ADD_LIST, ADD_CARD } from './actions';
+import { ADD_BOARD, ADD_LIST, REORDER_LIST, ADD_CARD } from './actions';
 
 export function handleBoards(
   state = {
@@ -6,6 +6,7 @@ export function handleBoards(
   },
   action
 ) {
+  const { boardId } = action;
   switch (action.type) {
     case ADD_BOARD:
       return {
@@ -13,14 +14,26 @@ export function handleBoards(
         boards: [{ id: action.id, title: action.board }, ...state.boards]
       };
     case ADD_LIST:
-      const { boardId } = action;
-      const nextState = state.boards.map(board => {
+      let nextState = state.boards.map(board => {
         if (board.id !== boardId) return board;
         return {
           ...board,
           lists: lists(board.lists, action)
         };
       });
+      return {
+        ...state,
+        boards: nextState
+      };
+    case REORDER_LIST:
+      const { list } = action;
+      nextState = state.boards.map(board => {
+        if (board.id !== boardId) return board;
+        return {
+          ...board,
+          lists: [...list]
+        }
+      })
       return {
         ...state,
         boards: nextState

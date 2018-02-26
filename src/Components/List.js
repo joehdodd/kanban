@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ListCard from './ListCard';
 import NewListCard from './NewListCard';
+import { Draggable } from 'react-beautiful-dnd';
 
 class List extends Component {
   constructor(props) {
@@ -27,19 +28,48 @@ class List extends Component {
 
   render() {
     const { cards } = this.props;
+    console.log(this.props);
     return (
-      <div className="list-container">
-        <div className="list-title">
-          <span>
-            {this.props.title} {this.props.id}
-          </span>
-        </div>
-        {!!cards &&
-          !!cards.length && (
-            <div className="list-items">{this.renderListItems()}</div>
-          )}
-        <NewListCard newCard={this.newCard} />
-      </div>
+      <Draggable
+        draggableId={this.props.id}
+        index={this.props.index}
+        key={this.props.id}
+      >
+        {(provided, snapshot) => {
+          const style = {
+            backgroundColor: snapshot.isDragging ? '#f5f5f5' : '#ebebeb',
+            ...provided.draggableProps.style,
+            transition: snapshot.isDragging
+              ? 'background-color 500ms cubic-bezier(0.4, 0.0, 0.2, 1)'
+              : ''
+          };
+          return (
+            <div>
+              <div
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                style={style}
+                className="list-wrapper"
+              >
+                <div className="list-container">
+                  <div className="list-title">
+                    <span>
+                      {this.props.title}
+                    </span>
+                  </div>
+                  {!!cards &&
+                    !!cards.length && (
+                      <div className="list-items">{this.renderListItems()}</div>
+                    )}
+                  <NewListCard newCard={this.newCard} />
+                </div>
+              </div>
+              {provided.placeholder}
+            </div>
+          );
+        }}
+      </Draggable>
     );
   }
 }
