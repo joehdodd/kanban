@@ -13,31 +13,6 @@ export function boards(
         ...state,
         boards: [{ id: action.id, title: action.board }, ...state.boards]
       };
-    case ADD_LIST:
-      let nextState = state.boards.map(board => {
-        if (board.id !== boardId) return board;
-        return {
-          ...board,
-          lists: lists(board.lists, action)
-        };
-      });
-      return {
-        ...state,
-        boards: nextState
-      };
-    case REORDER_LIST:
-      const { list } = action;
-      nextState = state.boards.map(board => {
-        if (board.id !== boardId) return board;
-        return {
-          ...board,
-          lists: [...list]
-        }
-      })
-      return {
-        ...state,
-        boards: nextState
-      };
     default:
       return state;
   }
@@ -57,6 +32,8 @@ export function lists(state = [], action) {
   switch (action.type) {
     case ADD_LIST:
       return [...state, handleList(state, action)];
+    case REORDER_LIST:
+      return [...action.list]
     case ADD_CARD:
       const { listId } = action;
       return state.map(list => {

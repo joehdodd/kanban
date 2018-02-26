@@ -14,15 +14,13 @@ const reorderArr = (list, startIndex, endIndex) => {
 class Board extends Component {
   onDragEnd = result => {
     const { boardId } = this.props.match.params;
-    const [thisBoard] = this.props.boards
-      .filter(board => board.id === boardId)
-      .map(board => board);
+    let lists = this.props.lists.filter(list => list.boardId === boardId);
     if (!result.destination) {
       return;
     }
 
     const items = reorderArr(
-      thisBoard.lists,
+      lists,
       result.source.index,
       result.destination.index
     );
