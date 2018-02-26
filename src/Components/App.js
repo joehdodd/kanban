@@ -20,22 +20,20 @@ class App extends Component {
   };
 
   render() {
-    const { boards } = this.props;
+    const { boards, actions } = this.props;
     return (
       <span>
         <StickyToolbar newBoard={this.newBoard} />
         <Route
           exact
           path="/"
-          render={props => (
-            <BoardsHome {...props} boards={boards} />
-          )}
+          render={props => <BoardsHome {...props} boards={boards} />}
         />
         <Route
           exact
           path="/board/:boardId"
           render={props => (
-            <Board {...props} boards={boards} newList={this.newList} />
+            <Board {...props} boards={boards} newList={this.newList} reorderList={actions.reorderList}/>
           )}
         />
       </span>
