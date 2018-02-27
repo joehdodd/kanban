@@ -1,4 +1,10 @@
-import { ADD_BOARD, ADD_LIST, REORDER_LIST, ADD_CARD } from './actions';
+import {
+  ADD_BOARD,
+  ADD_LIST,
+  REORDER_LIST,
+  ADD_CARD,
+  REORDER_CARD
+} from './actions';
 
 export function boards(
   state = {
@@ -32,7 +38,8 @@ export function lists(state = [], action) {
     case ADD_LIST:
       return [...state, handleList(state, action)];
     case REORDER_LIST:
-      return [...action.list]
+      console.log(action);
+      return [...action.list];
     case ADD_CARD:
       const { listId } = action;
       return state.map(list => {
@@ -41,8 +48,18 @@ export function lists(state = [], action) {
         return {
           ...list,
           cards: cards(list.cards, action)
-        }
-      })
+        };
+      });
+    case REORDER_CARD:
+      return state.map(list => {
+        // if (list.listId !== listId) return list;
+        // console.log(list);
+        return {
+          ...list,
+          cards: cards(list.cards, action)
+        };
+      });
+      break;
     default:
       return state;
   }
@@ -62,6 +79,9 @@ export function cards(state = [], action) {
   switch (action.type) {
     case ADD_CARD:
       return [...state, handleCard(state, action)];
+    case REORDER_CARD:
+      console.log(action);
+      return [...action.card];
     default:
       return state;
   }

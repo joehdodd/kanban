@@ -33,6 +33,15 @@ export function reorderList(list, boardId) {
   }
 }
 
+export const REORDER_CARD = 'REORDER_CARD';
+export function reorderCard(card, listId) {
+  return {
+    type: REORDER_CARD,
+    listId: listId,
+    card: card
+  }
+}
+
 export const ADD_CARD = 'ADD_CARD';
 export function addCard(card, listId) {
   return {

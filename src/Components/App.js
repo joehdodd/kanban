@@ -46,6 +46,7 @@ class App extends Component {
               newList={this.newList}
               newCard={this.newCard}
               reorderList={actions.reorderList}
+              reorderCard={actions.reorderCard}
             />
           )}
         />

@@ -7,7 +7,6 @@ const reorderArr = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
-
   return result;
 };
 
@@ -18,13 +17,28 @@ class Board extends Component {
     if (!result.destination) {
       return;
     }
-
-    const items = reorderArr(
-      lists,
-      result.source.index,
-      result.destination.index
-    );
-    this.props.reorderList(items, boardId);
+    if (result.type === 'list') {
+      const items = reorderArr(
+        lists,
+        result.source.index,
+        result.destination.index
+      );
+      this.props.reorderList(items, boardId);
+    }
+    if (result.type === 'card') {
+      let listId = result.draggableId.split('_')[1];
+      let [cards] = lists.map(list =>
+        //NOTE: if lists.length > 1 && lists.cards.length === 0, this breaks
+        list.cards.filter(card => card.listId === listId)
+      );
+      const items = reorderArr(
+        cards,
+        result.source.index,
+        result.destination.index
+      );
+      console.log(items);
+      this.props.reorderCard(items, boardId);
+    }
   };
   renderLists = thisBoard => {
     const { boardId } = this.props.match.params;
@@ -53,12 +67,14 @@ class Board extends Component {
             <span style={{ color: 'aliceblue' }}>{title}</span>
           </div>
           <div className="lists-container">
-            <Droppable droppableId="lists-droppable" direction="horizontal">
+            <Droppable
+              type="list"
+              droppableId="lists-droppable"
+              direction="horizontal"
+            >
               {(provided, snapshot) => (
                 <div ref={provided.innerRef} className="lists-wrapper">
-                  {!!lists && !!lists.length &&
-                    this.renderLists()
-                  }
+                  {!!lists && !!lists.length && this.renderLists()}
                   {provided.placeholder}
                 </div>
               )}
