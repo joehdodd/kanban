@@ -27,12 +27,12 @@ class List extends Component {
   };
 
   render() {
-    const { cards, id, boardId } = this.props;
+    const { cards, listId, boardId } = this.props;
     return (
       <Draggable
-        draggableId={this.props.id}
+        draggableId={this.props.listId}
         index={this.props.index}
-        key={this.props.id}
+        key={this.props.listId}
         type="list"
       >
         {(provided, snapshot) => {
@@ -53,13 +53,13 @@ class List extends Component {
                   </div>
                   {!!cards &&
                     !!cards.length && (
-                      <Droppable type="card" droppableId="cards-droppable" direction="vertical">
+                      <Droppable type="card" droppableId={`${listId}`} direction="vertical">
                         {(provided, snapshot) => (
                           <div ref={provided.innerRef} className="list-items">{this.renderListItems()}</div>
                         )}
                       </Droppable>
                     )}
-                  <NewListCard listId={id} boardId={boardId} newCard={this.props.newCard} />
+                  <NewListCard listId={listId} boardId={boardId} newCard={this.props.newCard} />
                 </div>
               </div>
               {provided.placeholder}

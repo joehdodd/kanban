@@ -34,11 +34,12 @@ export function reorderList(list, boardId) {
 }
 
 export const REORDER_CARD = 'REORDER_CARD';
-export function reorderCard(card, boardId, listId) {
+export function reorderCard(card, boardId, sourceId, destId) {
   return {
     type: REORDER_CARD,
     boardId: boardId,
-    listId: listId,
+    sourceId: sourceId,
+    destId: destId,
     card: card
   }
 }

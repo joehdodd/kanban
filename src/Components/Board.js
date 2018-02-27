@@ -12,6 +12,7 @@ const reorderArr = (list, startIndex, endIndex) => {
 
 const Board = props => {
   const onDragEnd = result => {
+    console.log(result);
     const { lists } = props.board;
     const { id } = props.board;
     if (!result.destination) {
@@ -26,14 +27,15 @@ const Board = props => {
       props.reorderList(items, id);
     }
     if (result.type === 'card') {
-      let listId = result.draggableId.split('_')[1];
+      let source = result.source.droppableId;
+      let destination = result.destination.droppableId;
       let [cards] = lists.map(list => list.cards).map(card => card);
       const items = reorderArr(
         cards,
         result.source.index,
         result.destination.index
       );
-      props.reorderCard(items, id, listId);
+      props.reorderCard(items, id, source, destination);
     }
   }
   const renderLists = thisBoard => {
@@ -42,7 +44,7 @@ const Board = props => {
       return (
         <List
           key={`list_${list.listId}`}
-          id={list.listId}
+          listId={list.listId}
           boardId={id}
           index={index}
           title={list.title}
