@@ -6,7 +6,6 @@ export function boards(
   },
   action
 ) {
-  const { boardId } = action;
   switch (action.type) {
     case ADD_BOARD:
       return {
@@ -38,9 +37,10 @@ export function lists(state = [], action) {
       const { listId } = action;
       return state.map(list => {
         if (list.listId !== listId) return list;
+        console.log(list);
         return {
           ...list,
-          cards: cards(state.cards, action)
+          cards: cards(list.cards, action)
         }
       })
     default:
@@ -51,8 +51,8 @@ export function lists(state = [], action) {
 export function handleCard(state = {}, action) {
   switch (action.type) {
     case ADD_CARD:
-      const { card, id } = action;
-      return { title: card, id: id };
+      const { card, id, listId } = action;
+      return { title: card, id: id, listId: listId };
     default:
       return state;
   }

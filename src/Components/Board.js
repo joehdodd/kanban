@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NewList from './NewList';
 import List from './List';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 const reorderArr = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -52,13 +52,13 @@ class Board extends Component {
           <div className="board-info-wrapper">
             <span style={{ color: 'aliceblue' }}>{title}</span>
           </div>
-          <div style={{ display: 'grid', gridAutoFlow: 'column' }}>
+          <div className="lists-container">
             <Droppable droppableId="lists-droppable" direction="horizontal">
               {(provided, snapshot) => (
                 <div ref={provided.innerRef} className="lists-wrapper">
-                  {!!lists &&
-                    !!lists.length &&
-                    this.renderLists()}
+                  {!!lists && !!lists.length &&
+                    this.renderLists()
+                  }
                   {provided.placeholder}
                 </div>
               )}

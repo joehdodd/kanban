@@ -35,20 +35,13 @@ class List extends Component {
         key={this.props.id}
       >
         {(provided, snapshot) => {
-          const style = {
-            backgroundColor: snapshot.isDragging ? '#f5f5f5' : '#ebebeb',
-            ...provided.draggableProps.style,
-            transition: snapshot.isDragging
-              ? 'background-color 500ms cubic-bezier(0.4, 0.0, 0.2, 1)'
-              : ''
-          };
           return (
             <div>
               <div
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
-                style={style}
+                style={provided.draggableProps.style}
                 className="list-wrapper"
               >
                 <div className="list-container">
