@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ListCard from './ListCard';
 import NewListCard from './NewListCard';
-import { Draggable } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 class List extends Component {
   constructor(props) {
@@ -52,7 +52,11 @@ class List extends Component {
                   </div>
                   {!!cards &&
                     !!cards.length && (
-                      <div className="list-items">{this.renderListItems()}</div>
+                      <Droppable droppableId="cards-droppable" direction="vertical">
+                        {(provided, snapshot) => (
+                          <div ref={provided.innerRef} className="list-items">{this.renderListItems()}</div>
+                        )}
+                      </Droppable>
                     )}
                   <NewListCard listId={id} newCard={this.props.newCard} />
                 </div>
