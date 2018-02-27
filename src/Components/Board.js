@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NewList from './NewList';
 import List from './List';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -10,10 +10,10 @@ const reorderArr = (list, startIndex, endIndex) => {
   return result;
 };
 
-class Board extends Component {
-  onDragEnd = result => {
-    const { boardId } = this.props.match.params;
-    let lists = this.props.lists.filter(list => list.boardId === boardId);
+const Board = props => {
+  const onDragEnd = result => {
+    const { lists } = props.board;
+    const { id } = props.board;
     if (!result.destination) {
       return;
     }
@@ -23,70 +23,64 @@ class Board extends Component {
         result.source.index,
         result.destination.index
       );
-      this.props.reorderList(items, boardId);
+      props.reorderList(items, id);
     }
     if (result.type === 'card') {
       let listId = result.draggableId.split('_')[1];
-      let [cards] = lists.map(list =>
-        //NOTE: if lists.length > 1 && lists.cards.length === 0, this breaks
-        list.cards.filter(card => card.listId === listId)
-      );
+      let [cards] = lists.map(list => list.cards).map(card => card);
       const items = reorderArr(
         cards,
         result.source.index,
         result.destination.index
       );
-      console.log(items);
-      this.props.reorderCard(items, boardId);
+      props.reorderCard(items, id, listId);
     }
-  };
-  renderLists = thisBoard => {
-    const { boardId } = this.props.match.params;
-    let lists = this.props.lists.filter(list => list.boardId === boardId);
+  }
+  const renderLists = thisBoard => {
+    const { lists, id } = props.board;
     return lists.map((list, index) => {
       return (
         <List
           key={`list_${list.listId}`}
           id={list.listId}
+          boardId={id}
           index={index}
           title={list.title}
-          newCard={this.props.newCard}
+          newCard={props.newCard}
           cards={list.cards}
         />
       );
     });
   };
-  render() {
-    const { boardId } = this.props.match.params;
-    const { title } = this.props.location.state;
-    let lists = this.props.lists.filter(list => list.boardId === boardId);
-    return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="board">
-          <div className="board-info-wrapper">
-            <span style={{ color: 'aliceblue' }}>{title}</span>
-          </div>
-          <div className="lists-container">
-            <Droppable
-              type="list"
-              droppableId="lists-droppable"
-              direction="horizontal"
-            >
-              {(provided, snapshot) => (
-                <div ref={provided.innerRef} className="lists-wrapper">
-                  {!!lists && !!lists.length && this.renderLists()}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-            <div className="add-list-container">
-              <NewList boardId={boardId} newList={this.props.newList} />
-            </div>
+  const { id } = props.board;
+  const { title } = props.board;
+  const { lists } = props.board;
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="board">
+        <div className="board-info-wrapper">
+          <span style={{ color: 'aliceblue' }}>{title}</span>
+        </div>
+        <div className="lists-container">
+          <Droppable
+            type="list"
+            droppableId="lists-droppable"
+            direction="horizontal"
+          >
+            {(provided, snapshot) => (
+              <div ref={provided.innerRef} className="lists-wrapper">
+                {!!lists && !!lists.length && renderLists()}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+          <div className="add-list-container">
+            <NewList boardId={id} newList={props.newList} />
           </div>
         </div>
-      </DragDropContext>
-    );
-  }
-}
+      </div>
+    </DragDropContext>
+  );
+};
 
 export default Board;

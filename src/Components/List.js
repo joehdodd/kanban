@@ -27,7 +27,7 @@ class List extends Component {
   };
 
   render() {
-    const { cards, id } = this.props;
+    const { cards, id, boardId } = this.props;
     return (
       <Draggable
         draggableId={this.props.id}
@@ -59,7 +59,7 @@ class List extends Component {
                         )}
                       </Droppable>
                     )}
-                  <NewListCard listId={id} newCard={this.props.newCard} />
+                  <NewListCard listId={id} boardId={boardId} newCard={this.props.newCard} />
                 </div>
               </div>
               {provided.placeholder}

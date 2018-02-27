@@ -34,19 +34,21 @@ export function reorderList(list, boardId) {
 }
 
 export const REORDER_CARD = 'REORDER_CARD';
-export function reorderCard(card, listId) {
+export function reorderCard(card, boardId, listId) {
   return {
     type: REORDER_CARD,
+    boardId: boardId,
     listId: listId,
     card: card
   }
 }
 
 export const ADD_CARD = 'ADD_CARD';
-export function addCard(card, listId) {
+export function addCard(card, boardId, listId) {
   return {
     type: ADD_CARD,
     id: uuidv4(),
+    boardId: boardId,
     listId: listId,
     card: card
   }
