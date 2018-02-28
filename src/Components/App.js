@@ -25,7 +25,8 @@ class App extends Component {
   };
 
   render() {
-    const { boards, actions } = this.props;
+    const { boards, cards, actions } = this.props;
+    console.log(cards);
     return (
       <span>
         <StickyToolbar newBoard={this.newBoard} />
@@ -43,7 +44,8 @@ class App extends Component {
               newList={this.newList}
               newCard={this.newCard}
               reorderList={actions.reorderList}
-              reorderCard={actions.reorderCard}
+              moveCardInList={actions.moveCardInList}
+              moveCardToNewList={actions.moveCardToNewList}
             />
           )}
         />
@@ -53,10 +55,11 @@ class App extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const { boards, router } = state;
+  const { boards, cards, router } = state;
   const { location } = router;
   return {
     boards,
+    cards,
     location
   };
 }

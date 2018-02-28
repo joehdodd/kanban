@@ -3,8 +3,14 @@ import {
   ADD_LIST,
   REORDER_LIST,
   ADD_CARD,
-  REORDER_CARD
+  REORDER_CARDS_IN_LIST,
+  MOVE_CARD_TO_NEW_LIST
 } from './actions';
+
+Array.prototype.insert = function(index, item) {
+  this.splice(index, 0, item);
+  return this;
+};
 
 export function handleBoard(state = {}, action) {
   switch (action.type) {
@@ -54,7 +60,7 @@ const dummyState = {
       ]
     }
   ]
-}
+};
 
 export function boards(state = [dummyState], action) {
   switch (action.type) {
@@ -70,18 +76,48 @@ export function boards(state = [dummyState], action) {
         };
       });
     case ADD_CARD:
-    case REORDER_CARD:
       return state.map(board => {
         if (board.id !== action.boardId) return board;
         return {
           ...board,
           lists: board.lists.map(list => {
-            console.log(list.listId);
-            if (list.listId !== action.sourceId) return list;
-            // console.log(action.card.map(card => card.listId === action.listId));
+            if (list.listId !== action.listId) return list;
+            return {
+              ...list,
+              cards: cards(list.cards, action)
+            };
+          })
+        };
+      });
+    case REORDER_CARDS_IN_LIST:
+      return state.map(board => {
+        if (board.id !== action.boardId) return board;
+        return {
+          ...board,
+          lists: board.lists.map(list => {
+            if (list.listId !== action.sourceId.droppableId) return list;
             return {
               ...list,
               cards: [...action.card]
+            };
+          })
+        };
+      });
+    case MOVE_CARD_TO_NEW_LIST:
+      return state.map(board => {
+        if (board.id !== action.boardId) return board;
+        return {
+          ...board,
+          lists: board.lists.map(list => {
+            if (list.listId === action.destId.droppableId) {
+              return {
+                ...list,
+                cards: list.cards.insert(action.destination, action.target)
+              };
+            };
+            return {
+              ...list,
+              cards: [...action.sourceCards]
             };
           })
         };
@@ -115,14 +151,28 @@ export function lists(state = [], action) {
           cards: cards(list.cards, action)
         };
       });
-    // case REORDER_CARD:
-    //   return state.map(list => {
-    //     if (list.listId !== action.listId) return list;
-    //     return {
-    //       ...list,
-    //       cards: [...action.card]
-    //     };
-    //   });
+    case REORDER_CARDS_IN_LIST:
+      return state.map(list => {
+        if (list.listId !== action.sourceId.droppableId) return list;
+        return {
+          ...list,
+          cards: [...action.card]
+        };
+      });
+    case MOVE_CARD_TO_NEW_LIST:
+      return state.map(list => {
+        console.log(action);
+        if (list.listId === action.destId.droppableId) {
+          return {
+            ...list,
+            cards: list.cards.insert(action.destination, action.target)
+          };
+        }
+        return {
+          ...list,
+          cards: [...action.sourceCards]
+        };
+      });
     default:
       return state;
   }
@@ -142,8 +192,17 @@ export function cards(state = [], action) {
   switch (action.type) {
     case ADD_CARD:
       return [...state, handleCard(state, action)];
-    // case REORDER_CARD:
-    //   return [...state, ...action.card];
+    case REORDER_CARDS_IN_LIST:
+      return [...state, ...action.card];
+    default:
+      return state;
+  }
+}
+
+export function moveCardToNewList(state = {}, action) {
+  switch (action.type) {
+    case MOVE_CARD_TO_NEW_LIST:
+      return action.target;
     default:
       return state;
   }

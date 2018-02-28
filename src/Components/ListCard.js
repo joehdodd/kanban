@@ -5,7 +5,7 @@ const ListCard = props => {
   return (
     <Draggable
       type="card"
-      draggableId={`${props.id}_${props.listId}`}
+      draggableId={props.id}
       index={props.index}
       key={props.id}
     >

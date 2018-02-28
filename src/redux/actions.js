@@ -33,14 +33,28 @@ export function reorderList(list, boardId) {
   }
 }
 
-export const REORDER_CARD = 'REORDER_CARD';
-export function reorderCard(card, boardId, sourceId, destId) {
+export const REORDER_CARDS_IN_LIST = 'REORDER_CARDS_IN_LIST';
+export function moveCardInList(card, boardId, sourceId, destId) {
   return {
-    type: REORDER_CARD,
+    type: REORDER_CARDS_IN_LIST,
     boardId: boardId,
     sourceId: sourceId,
     destId: destId,
     card: card
+  }
+}
+
+export const MOVE_CARD_TO_NEW_LIST = 'MOVE_CARD_TO_NEW_LIST';
+export function moveCardToNewList(target, destination, sourceCards, destCards, boardId, sourceId, destId) {
+  return {
+    type: MOVE_CARD_TO_NEW_LIST,
+    target: target,
+    destination: destination,
+    sourceCards: sourceCards,
+    destCards: destCards,
+    boardId: boardId,
+    sourceId: sourceId,
+    destId: destId,
   }
 }
 

@@ -4,15 +4,14 @@ import List from './List';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 const reorderArr = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-  return result;
+  const [removed] = list.splice(startIndex, 1);
+  list.splice(endIndex, 0, removed);
+  return list;
 };
 
 const Board = props => {
   const onDragEnd = result => {
-    console.log(result);
+    // console.log('drop result', result);
     const { lists } = props.board;
     const { id } = props.board;
     if (!result.destination) {
@@ -27,18 +26,38 @@ const Board = props => {
       props.reorderList(items, id);
     }
     if (result.type === 'card') {
-      let source = result.source.droppableId;
-      let destination = result.destination.droppableId;
-      let some = lists.map(list => list.cards.map(card => card.listId))
-      // const items = reorderArr(
-      //   cards,
-      //   result.source.index,
-      //   result.destination.index
-      // );
-      // console.log(items);
-      // props.reorderCard(items, id, source, destination);
+      let { source, destination } = result;
+      let filterSourceCards = lists.map(list =>
+        list.cards.filter(card => card.listId === source.droppableId)
+      );
+      let filterDestCards = lists.map(list =>
+        list.cards.filter(card => card.listId === destination.droppableId)
+      );
+      let sourceCards = [].concat.apply([], filterSourceCards);
+      let destCards = [].concat.apply([], filterDestCards);
+      if (source.droppableId !== destination.droppableId) {
+        let target = sourceCards[source.index];
+        sourceCards.splice(source.index, 1);
+        destCards.splice(destination.index, 0, target);
+        props.moveCardToNewList(
+          target,
+          destination.index,
+          sourceCards,
+          destCards,
+          id,
+          source,
+          destination
+        );
+      } else {
+        const items = reorderArr(
+          sourceCards,
+          result.source.index,
+          result.destination.index
+        );
+        props.moveCardInList(items, id, source, destination);
+      }
     }
-  }
+  };
   const renderLists = thisBoard => {
     const { lists, id } = props.board;
     return lists.map((list, index) => {
