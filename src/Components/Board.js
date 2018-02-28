@@ -37,8 +37,8 @@ const Board = props => {
       let destCards = [].concat.apply([], filterDestCards);
       if (source.droppableId !== destination.droppableId) {
         let target = sourceCards[source.index];
-        sourceCards.splice(source.index, 1);
-        destCards.splice(destination.index, 0, target);
+        // sourceCards.splice(source.index, 1);
+        // destCards.splice(destination.index, 0, target);
         props.moveCardToNewList(
           target,
           destination.index,

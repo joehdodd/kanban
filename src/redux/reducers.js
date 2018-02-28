@@ -7,6 +7,7 @@ import {
   MOVE_CARD_TO_NEW_LIST
 } from './actions';
 
+// eslint-disable-next-line
 Array.prototype.insert = function(index, item) {
   this.splice(index, 0, item);
   return this;
@@ -117,7 +118,7 @@ export function boards(state = [dummyState], action) {
             };
             return {
               ...list,
-              cards: [...action.sourceCards]
+              cards: list.cards.splice(action.sourceId.index, 1)
             };
           })
         };
