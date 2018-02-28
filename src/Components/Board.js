@@ -29,13 +29,14 @@ const Board = props => {
     if (result.type === 'card') {
       let source = result.source.droppableId;
       let destination = result.destination.droppableId;
-      let [cards] = lists.map(list => list.cards).map(card => card);
-      const items = reorderArr(
-        cards,
-        result.source.index,
-        result.destination.index
-      );
-      props.reorderCard(items, id, source, destination);
+      let some = lists.map(list => list.cards.map(card => card.listId))
+      // const items = reorderArr(
+      //   cards,
+      //   result.source.index,
+      //   result.destination.index
+      // );
+      // console.log(items);
+      // props.reorderCard(items, id, source, destination);
     }
   }
   const renderLists = thisBoard => {

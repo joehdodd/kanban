@@ -3,7 +3,7 @@ import createHistory from 'history/createBrowserHistory';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import { boards, lists, cards } from './reducers';
+import { boards } from './reducers';
 
 export const history = createHistory();
 // eslint-disable-next-line
@@ -14,11 +14,10 @@ const routeMiddleware = routerMiddleware(history);
 export const appStore = createStore(
   combineReducers({
     boards,
-    lists,
-    cards,
-    router: routerReducer
+    router: routerReducer,
   }),
   // preloadedState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(
     routeMiddleware,
     thunkMiddleware,

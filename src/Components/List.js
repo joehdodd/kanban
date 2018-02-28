@@ -53,7 +53,7 @@ class List extends Component {
                   </div>
                   {!!cards &&
                     !!cards.length && (
-                      <Droppable type="card" droppableId={`${listId}`} direction="vertical">
+                      <Droppable type="card" droppableId={listId} direction="vertical">
                         {(provided, snapshot) => (
                           <div ref={provided.innerRef} className="list-items">{this.renderListItems()}</div>
                         )}
