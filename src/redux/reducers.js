@@ -6,7 +6,6 @@ import {
   REORDER_CARDS_IN_LIST,
   MOVE_CARD_TO_NEW_LIST
 } from './actions';
-import { dummyState } from './state';
 
 // eslint-disable-next-line
 Array.prototype.insert = function(index, item) {
@@ -23,19 +22,23 @@ export function handleBoard(state = {}, action) {
   }
 }
 
-export function boards(state = [dummyState], action) {
+export function boards(state = [], action) {
   switch (action.type) {
     case ADD_BOARD:
       return [...state, handleBoard(state, action)];
-    case ADD_LIST:
-    case REORDER_LIST:
-      return state.map(board => {
-        if (board.id !== action.boardId) return board;
-        return {
-          ...board,
-          lists: lists(board.lists, action)
-        };
-      });
+    // case ADD_LIST:
+    // // case REORDER_LIST:
+    //   return state.map(board => {
+    //     if (board.id !== action.boardId) return board;
+    //     // console.log(action);
+    //     // console.log({...board});
+    //     let lists = board.lists;
+    //     return {
+    //       ...board,
+    //       // lists: [...action.list],
+    //       lists: lists(board.lists, action)
+    //     };
+    //   });
     case ADD_CARD:
       return state.map(board => {
         if (board.id !== action.boardId) return board;
@@ -87,6 +90,10 @@ export function boards(state = [dummyState], action) {
                 )
               };
             }
+            // return {
+            //   ...list,
+            //   cards: lists.cards
+            // }
           })
         };
       });
@@ -110,6 +117,7 @@ export function lists(state = [], action) {
     case ADD_LIST:
       return [...state, handleList(state, action)];
     case REORDER_LIST:
+      console.log(action);
       return [...action.list];
     case ADD_CARD:
       return state.map(list => {

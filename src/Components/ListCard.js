@@ -9,23 +9,22 @@ const ListCard = props => {
       index={props.index}
       key={props.id}
     >
-      {(provided, snapshot) => {
-        return (
-          <div style={{width: `95%`, marginBottom: `2.5px`}}>
-            <div
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}
-              style={provided.draggableProps.style}
+      {(provided, snapshot) => (
+        <div className="list-card-wrapper">
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            style={{
+              ...provided.draggableProps.style
+            }}
+            className="list-card-container"
             >
-              <div className="list-card-container">
-                <span>{props.title}</span>
-              </div>
-            </div>
-            {provided.placeholder}
+            <span>{props.title}</span>
           </div>
-        );
-      }}
+          {provided.placeholder}
+        </div>
+      )}
     </Draggable>
   );
 };
