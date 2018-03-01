@@ -26,7 +26,7 @@ class NewListCard extends Component {
   render() {
     const { renderForm } = this.state;
     return (
-      <span className="list-card-container">
+      <span className="list-card-add-container">
         {!renderForm && (
           <span onClick={() => this.renderForm()}>Add a new card</span>
         )}
