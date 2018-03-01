@@ -70,16 +70,23 @@ export function boards(state = [dummyState], action) {
         return {
           ...board,
           lists: board.lists.map(list => {
+            if (list.listId === action.sourceId.droppableId) {
+              return {
+                ...list,
+                cards: list.cards.filter(
+                  (_, index) => index !== action.sourceId.index
+                )
+              };
+            }
             if (list.listId === action.destId.droppableId) {
               return {
                 ...list,
-                cards: list.cards.insert(action.destination, action.target)
+                cards: list.cards.insert(
+                  action.destination,
+                  moveCardToNewList(state, action)
+                )
               };
             }
-            return {
-              ...list,
-              cards: list.cards.splice(action.sourceId.index, 1)
-            };
           })
         };
       });
@@ -126,7 +133,10 @@ export function lists(state = [], action) {
         if (list.listId === action.destId.droppableId) {
           return {
             ...list,
-            cards: list.cards.insert(action.destination, action.target)
+            cards: list.cards.insert(
+              action.destination,
+              moveCardToNewList(state, action)
+            )
           };
         }
         return {
@@ -163,7 +173,11 @@ export function cards(state = [], action) {
 export function moveCardToNewList(state = {}, action) {
   switch (action.type) {
     case MOVE_CARD_TO_NEW_LIST:
-      return action.target;
+      return {
+        id: action.target.id,
+        listId: action.destId.droppableId,
+        title: action.target.title
+      };
     default:
       return state;
   }
