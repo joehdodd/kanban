@@ -52,11 +52,11 @@
   padding: 10px;
 }
 
-.list-card-container {
+.list-card-container,
+.list-card-add-container {
   display: grid;
   grid-auto-flow: row;
   padding: 10px;
-  width: 95%;
   border-radius: 3px;
   min-height: 50px;
   background: $cardbg;
@@ -64,12 +64,20 @@
   border-bottom: 1px solid $darkgrey;
 }
 
+.list-card-container {
+  width: 100%;
+}
+
+.list-card-add-container {
+  width: 95%;
+}
+
 .list-items {
+  min-height: 50px;
   max-height: calc(100vh - 250px);
   overflow-y: scroll;
   display: grid;
   grid-auto-flow: row;
-  grid-gap: 5px;
   width: 100%;
   justify-items: center;
 }

@@ -11,7 +11,7 @@ const ListCard = props => {
     >
       {(provided, snapshot) => {
         return (
-          <div>
+          <div style={{width: `95%`, marginBottom: `2.5px`}}>
             <div
               ref={provided.innerRef}
               {...provided.draggableProps}
