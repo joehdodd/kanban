@@ -33,11 +33,37 @@ export function reorderList(list, boardId) {
   }
 }
 
+export const REORDER_CARDS_IN_LIST = 'REORDER_CARDS_IN_LIST';
+export function moveCardInList(card, boardId, sourceId, destId) {
+  return {
+    type: REORDER_CARDS_IN_LIST,
+    boardId: boardId,
+    sourceId: sourceId,
+    destId: destId,
+    card: card
+  }
+}
+
+export const MOVE_CARD_TO_NEW_LIST = 'MOVE_CARD_TO_NEW_LIST';
+export function moveCardToNewList(target, destination, sourceCards, destCards, boardId, sourceId, destId) {
+  return {
+    type: MOVE_CARD_TO_NEW_LIST,
+    target: target,
+    destination: destination,
+    sourceCards: sourceCards,
+    destCards: destCards,
+    boardId: boardId,
+    sourceId: sourceId,
+    destId: destId,
+  }
+}
+
 export const ADD_CARD = 'ADD_CARD';
-export function addCard(card, listId) {
+export function addCard(card, boardId, listId) {
   return {
     type: ADD_CARD,
     id: uuidv4(),
+    boardId: boardId,
     listId: listId,
     card: card
   }

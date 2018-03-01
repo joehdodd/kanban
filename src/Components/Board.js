@@ -1,76 +1,59 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NewList from './NewList';
 import List from './List';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { reorder } from '.././utils/reorder';
 
-const reorderArr = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
 
-  return result;
-};
-
-class Board extends Component {
-  onDragEnd = result => {
-    const { boardId } = this.props.match.params;
-    let lists = this.props.lists.filter(list => list.boardId === boardId);
-    if (!result.destination) {
-      return;
-    }
-
-    const items = reorderArr(
-      lists,
-      result.source.index,
-      result.destination.index
-    );
-    this.props.reorderList(items, boardId);
-  };
-  renderLists = thisBoard => {
-    const { boardId } = this.props.match.params;
-    let lists = this.props.lists.filter(list => list.boardId === boardId);
+const Board = props => {
+  const onDragEnd = (result) => {
+    return reorder(result, props);
+  }
+  const renderLists = thisBoard => {
+    const { lists, id } = props.board;
     return lists.map((list, index) => {
       return (
         <List
           key={`list_${list.listId}`}
-          id={list.listId}
+          listId={list.listId}
+          boardId={id}
           index={index}
           title={list.title}
-          newCard={this.props.newCard}
+          newCard={props.newCard}
           cards={list.cards}
         />
       );
     });
   };
-  render() {
-    const { boardId } = this.props.match.params;
-    const { title } = this.props.location.state;
-    let lists = this.props.lists.filter(list => list.boardId === boardId);
-    return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="board">
-          <div className="board-info-wrapper">
-            <span style={{ color: 'aliceblue' }}>{title}</span>
-          </div>
-          <div className="lists-container">
-            <Droppable droppableId="lists-droppable" direction="horizontal">
-              {(provided, snapshot) => (
-                <div ref={provided.innerRef} className="lists-wrapper">
-                  {!!lists && !!lists.length &&
-                    this.renderLists()
-                  }
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-            <div className="add-list-container">
-              <NewList boardId={boardId} newList={this.props.newList} />
-            </div>
+  const { id } = props.board;
+  const { title } = props.board;
+  const { lists } = props.board;
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="board">
+        <div className="board-info-wrapper">
+          <span style={{ color: 'aliceblue' }}>{title}</span>
+        </div>
+        <div className="lists-container">
+          <Droppable
+            type="list"
+            droppableId="lists-droppable"
+            direction="horizontal"
+          >
+            {(provided, snapshot) => (
+              <div ref={provided.innerRef} className="lists-wrapper">
+                {!!lists && !!lists.length && renderLists()}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+          <div className="add-list-container">
+            <NewList boardId={id} newList={props.newList} />
           </div>
         </div>
-      </DragDropContext>
-    );
-  }
-}
+      </div>
+    </DragDropContext>
+  );
+};
 
 export default Board;
