@@ -25,8 +25,8 @@ class App extends Component {
   };
 
   render() {
+    // eslint-disable-next-line
     const { boards, cards, actions } = this.props;
-    console.log(cards);
     return (
       <span>
         <StickyToolbar newBoard={this.newBoard} />

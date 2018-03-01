@@ -16,7 +16,7 @@ export const appStore = createStore(
     boards,
     lists,
     cards,
-    // moveCardToNewList,
+    moveCardToNewList,
     router: routerReducer,
   }),
   // preloadedState,
