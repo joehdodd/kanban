@@ -55,17 +55,19 @@ class List extends Component {
                   <div className="list-title">
                     <span>{this.props.title}</span>
                   </div>
-                  <Droppable
-                    type="card"
-                    droppableId={listId}
-                    direction="vertical"
-                  >
-                    {(provided, snapshot) => (
-                      <div ref={provided.innerRef} className="list-items">
-                        {!!cards && this.renderListItems()}
-                      </div>
-                    )}
-                  </Droppable>
+                  <div className="list-items">
+                    <Droppable
+                      type="card"
+                      droppableId={listId}
+                      direction="vertical"
+                    >
+                      {(provided, snapshot) => (
+                        <div ref={provided.innerRef}>
+                          {!!cards && this.renderListItems()}
+                        </div>
+                      )}
+                    </Droppable>
+                  </div>
                   <NewListCard
                     listId={listId}
                     boardId={boardId}

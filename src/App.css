@@ -9,7 +9,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: #0f6ba5; }
+  background: #4e6c43; }
 
 a {
   text-decoration: none;
@@ -72,7 +72,7 @@ a {
   padding: 0 15px; }
 
 .add-list-container {
-  background: #fff;
+  background: #fefefe;
   height: 40px;
   width: 275px;
   border-radius: 3px;
@@ -98,7 +98,7 @@ a {
       justify-content: start; } }
 
 .list-wrapper {
-  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.5);
   border-radius: 3px;
   margin-right: 10px; }
 
@@ -108,7 +108,7 @@ a {
   grid-gap: 5px;
   justify-items: center;
   align-self: start;
-  background-color: #e2e4e6;
+  background-color: #cccccc;
   padding-bottom: 15px;
   width: 100%;
   color: #3c3c3c;
@@ -120,13 +120,17 @@ a {
       max-height: 100%; } }
 
 .list-title {
-  background-color: #fff;
   width: 100%;
   height: 40px;
   color: #3c3c3c;
+  background: #fefefe;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   padding: 10px; }
+
+.list-card-wrapper {
+  width: 95%;
+  margin-bottom: 2.5px; }
 
 .list-card-container,
 .list-card-add-container {
@@ -135,9 +139,9 @@ a {
   padding: 10px;
   border-radius: 3px;
   min-height: 50px;
-  background: #fff;
+  background: #fefefe;
   color: #3c3c3c;
-  border-bottom: 1px solid #a1a1a1; }
+  border-bottom: 1px solid #797979; }
 
 .list-card-container {
   width: 100%; }
